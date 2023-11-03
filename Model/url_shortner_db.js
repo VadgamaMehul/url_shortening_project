@@ -1,7 +1,7 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const shortid = require("shortid");
 
-//Todoschema
+// Todo schema
 const shortUrlSchema = new mongoose.Schema({
   full: {
     type: String,
