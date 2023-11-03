@@ -9,7 +9,11 @@ const PORT = process.env.port || 3000;
 
 // Connect to MongoDB database using Mongoose.
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL, {{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // useCreateIndex: true, // Add this if you're using Mongoose >= 6
+  })
   .then(() => console.log("connected to MongoDB"))
   .catch((err) => console.error(err));
 
