@@ -1,36 +1,34 @@
 const url_shortner_db = require("../Model/url_shortner_db");
+const { shortUrlJoiSchema } = require("../Validation/shortUrlJoi");
 
 //routes
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
   const shortUrls = await url_shortner_db.find();
-  if (!shortUrls || !shortUrls[0])
-    return res.status(404).send({ msg: "No URL found" });
-  // else return res.json(shortUrls);
   res.render("index", { shortUrls: shortUrls });
 });
 
 //Post
 router.post("/shortUrls", async (req, res) => {
-  await url_shortner_db.create({ full: req.body.fullUrl });
-  res.redirect("/");
-
-  //   const task = req.body;
-  //   url_shortner_db
-  //     .create(task)
-  //     .then((data) => {
-  //       console.log("Data has been added successfully");
-  //       console.log(data);
-  //       res.send(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //     console.log(task);
-  //     if (!task) return res.status(400).json({ msg: "No Task Provided" });
+  try {
+    const existingShortUrl = await url_shortner_db.findOne({
+      full: req.body.fullUrl,
+    });
+    if (!existingShortUrl) {
+      await url_shortner_db.create({ full: req.body.fullUrl });
+      res.redirect("/");
+    } else {
+      //SEND RESPONCE
+      return res.status(409).redirect("/");
+    }
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 });
 
+//redirect
 router.get("/:shortUrl", async (req, res) => {
   const shortUrl = await url_shortner_db.findOne({
     short: req.params.shortUrl,
