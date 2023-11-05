@@ -8,9 +8,8 @@ This project is a backend service for a URL shortening service, built using Node
 3. [Setting Up the Environment](#setting-up-the-environment)
 4. [Running the Server](#running-the-server)
 5. [API Endpoints](#api-endpoints)
-6. [Testing](#testing)
-7. [Deployment](#deployment)
-8. [Security](#security)
+6. [Deployment](#deployment)
+
 
 ---
 
@@ -27,7 +26,7 @@ This structure represents the organization of files and directories within the p
 - `package.json` lists Node.js project dependencies.
 - `README.md` is the project's main documentation file.
 
-# Dependencies <a name="dependencies"></a>
+# 2. Dependencies <a name="dependencies"></a>
 
 To run the project, you'll need the following dependencies. These are specified in the `package.json` file:
 
@@ -78,9 +77,8 @@ To start the server, run: `npm start`
 - **Response:** URL deleted successfully.
 
 
-# 6. Deployment and Security
+# 6. Deployment <a name="deployment"></a>
 
-## Deployment <a name="deployment"></a>
 
 Deployed in Render:
 https://url-shortening-service-h2hb.onrender.com/
